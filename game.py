@@ -1,5 +1,5 @@
 from deck import Deck
-
+from hand import Hand
 
 class Game:
 
@@ -12,11 +12,11 @@ class Game:
     def one_round(self, players):
 
         deck = Deck()
-        player_hands = {player: [] for player in players}
         table = []
+        player_hands = {player: Hand(player, [], table) for player in players}
         pot = 0
 
-        self.deal(players, player_hands, deck)
+        self.deal(player_hands, deck)
         print(player_hands)
         print(table)
 
@@ -49,9 +49,7 @@ class Game:
 
         while last_raised != current_player and len(players) > 1:
 
-            print(
-                f'Current Player: {players[current_player].name}, Hand: {player_hands[players[current_player]]}, Table: {table}'
-            )
+            print(player_hands[players[current_player]])
             bet = int(input())  #player.get_bet()#TODO: add args
             # TODO: remove money from player account
 
@@ -66,9 +64,9 @@ class Game:
 
         return pot
 
-    def deal(self, players, player_hands, deck):
-        for player in players:
-            player_hands[player] += deck.get_cards(2)
+    def deal(self, hands, deck):
+        for hand in hands:
+            hands[hand].cards += deck.get_cards(2)
 
     def add_to_table(self, table, deck, num_cards):
         table += deck.get_cards(num_cards)
@@ -91,10 +89,12 @@ class Player():
         return self.name
 
 
-A = Player("A")
-B = Player("B")
-C = Player("C")
 
-game = Game()
+if __name__ == '__main__':
+    A = Player("A")
+    B = Player("B")
+    C = Player("C")
 
-game.one_round([A, B, C])
+    game = Game()
+
+    game.one_round([A, B, C])

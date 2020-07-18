@@ -11,6 +11,7 @@ class Card(object):
         self.suit = suit
         self.rank = rank
 
+    # Ignore this. It's an override for the string representation of the card.
     def __repr__(self):
         return f'{self.rank} of {self.suit}'
 
