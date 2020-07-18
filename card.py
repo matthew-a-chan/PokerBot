@@ -1,6 +1,3 @@
-
-
-
 class Card(object):
 
     # Constants!!! Don't change these or I will hunt you down
@@ -10,8 +7,6 @@ class Card(object):
     suit = ""
     rank = 0
 
-
-    
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
@@ -20,7 +15,7 @@ class Card(object):
         return f'{self.rank} of {self.suit}'
 
     def get_suit(self):
-         return self.suit
-    
+        return self.suit
+
     def get_rank(self):
         return self.rank
